@@ -1,0 +1,216 @@
+# Canonical artifacts derived from the uploaded X12 837P message
+# Format: one file, each table rendered as CSV
+# Delimiter: comma
+# Null values rendered as empty string
+
+## transaction_entity
+transaction_id,interchange_control_no,functional_group_control_no,transaction_set_control_no,message_type,version,source_format,created_date,created_time
+TXN-1001,000000901,901,0001,837P,005010X222A1,X12,20260411,1430
+
+## submitter_entity
+submitter_id,name,identifier_type,identifier_value,contact_name,phone,email
+SUB-1,MASKNORTH RIVER SPECIALTY MEDICAL GROUP,46,MASK837SENDER01,MASKEDI SUPPORT,9996175554100,MASKedi@northriver.example
+
+## receiver_entity
+receiver_id,name,identifier_type,identifier_value
+RCV-1,MASKCLEARINGHOUSE RECEIVER,46,MASKCH999
+
+## billing_provider_entity
+billing_provider_id,organization_name,npi,taxonomy,tax_id,address_line1,address_line2,city,state,postal_code,contact_name,contact_phone
+BP-1,MASKNORTH RIVER SPECIALTY MEDICAL GROUP,9991992994001,207Q00000X,999842719901,MASK1250 LONGWOOD AVE,MASKSTE 400,MASKBOSTON,MA,99902115,MASKBILLING OFFICE,9996175554100
+
+## payto_provider_entity
+payto_provider_id,organization_name,npi,address_line1,address_line2,city,state,postal_code
+PTP-1,MASKNORTH RIVER SPECIALTY MEDICAL GROUP LAB,9991881777001,MASK1250 LONGWOOD AVE,MASKLAB FL,MASKBOSTON,MA,99902115
+
+## payer_entity
+payer_id,name,payer_identifier
+PAY-1,MASKAETNA COMMERCIAL NORTHEAST,MASKAETNA001
+PAY-2,MASKUNITEDHEALTHCARE NATIONAL COMMERCIAL,MASKUHC001
+PAY-3,MASKBLUE CROSS BLUE SHIELD OF MASSACHUSETTS,MASKBCBSMA01
+
+## person_entity
+person_id,person_type,mastering_note
+P-1,subscriber_patient,Claim 1 same subscriber and patient
+P-2,subscriber,Claim 2 subscriber
+P-3,patient,Claim 2 dependent patient
+P-4,subscriber_patient,Claim 3 same subscriber and patient
+P-5,subscriber,Claim 4 subscriber
+P-6,patient,Claim 4 dependent patient
+P-7,subscriber_patient,Claim 5 same subscriber and patient
+
+## person_name
+person_name_id,person_id,first_name,last_name,middle_name
+PN-1,P-1,MASKELENA,MASKCARTER,MASKM
+PN-2,P-2,MASKDAVID,MASKMORRISON,
+PN-3,P-3,MASKAVA,MASKMORRISON,
+PN-4,P-4,MASKSOPHIA,MASKNGUYEN,
+PN-5,P-5,MASKLENA,MASKOWENS,
+PN-6,P-6,MASKNOAH,MASKOWENS,
+PN-7,P-7,MASKTHOMAS,MASKREED,
+
+## person_demographic
+person_demographic_id,person_id,birth_date,gender
+PD-1,P-1,99919860314,F
+PD-2,P-2,99919741122,M
+PD-3,P-3,99920130702,F
+PD-4,P-4,99919910708,F
+PD-5,P-5,99919800919,F
+PD-6,P-6,99920190111,M
+PD-7,P-7,99919480825,M
+
+## person_identifier
+person_identifier_id,person_id,identifier_type,identifier_value,assigning_authority
+PI-1,P-1,member_id,MASKW458112903,MASKAETNA001
+PI-2,P-2,member_id,MASKU981102113,MASKUHC001
+PI-3,P-3,dependent_member_id,MASKU981102113-01,MASKUHC001
+PI-4,P-4,member_id,MASKXH772611900,MASKBCBSMA01
+PI-5,P-5,member_id,MASKA663882109,MASKAETNA001
+PI-6,P-6,dependent_member_id,MASKA663882109-02,MASKAETNA001
+PI-7,P-7,member_id,MASKAET44772110,MASKAETNA001
+
+## person_address
+person_address_id,person_id,address_line1,city,state,postal_code
+PA-1,P-1,MASK48 HUDSON ST,MASKCAMBRIDGE,MA,99902139
+PA-2,P-2,MASK9 PARK VALE DR,MASKSOMERVILLE,MA,99902144
+PA-3,P-3,MASK9 PARK VALE DR,MASKSOMERVILLE,MA,99902144
+PA-4,P-4,MASK210 BEACON PL,MASKBROOKLINE,MA,99902445
+PA-5,P-5,MASK930 ASHFORD LN,MASKJAMAICA PLAIN,MA,99902130
+PA-6,P-6,MASK930 ASHFORD LN,MASKJAMAICA PLAIN,MA,99902130
+PA-7,P-7,MASK6 HARBOR VIEW RD,MASKMILTON,MA,99902186
+
+## provider_entity
+provider_id,last_name,first_name,npi,taxonomy
+PRV-1,MASKRAHMAN,MASKLILA,9991336201101,207R00000X
+PRV-2,MASKPATEL,MASKNINA,9991205987742,363A00000X
+PRV-3,MASKSTEIN,MASKEVAN,9991548392011,207RC0000X
+PRV-4,MASKPARK,MASKJULIA,9991666777888,
+
+## service_facility_entity
+service_facility_id,organization_name,npi,address_line1,city,state,postal_code
+SF-1,MASKBOSTON CARDIO DIAGNOSTICS,9991777444555,MASK200 HUNTINGTON AVE,MASKBOSTON,MA,99902115
+
+## claim_entity
+claim_id,transaction_id,claim_submitter_id,payer_id,subscriber_person_id,patient_person_id,total_charge_amount,place_of_service,facility_code_qualifier,claim_frequency_type_code
+CLM-1,TXN-1001,MASKNRSMG-20260411-0001,PAY-1,P-1,P-1,999217.00,11,B,1
+CLM-2,TXN-1001,MASKNRSMG-20260411-0002,PAY-2,P-2,P-3,999323.00,11,B,1
+CLM-3,TXN-1001,MASKNRSMG-20260411-0003,PAY-3,P-4,P-4,999410.00,22,B,1
+CLM-4,TXN-1001,MASKNRSMG-20260411-0004,PAY-1,P-5,P-6,999260.00,11,B,1
+CLM-5,TXN-1001,MASKNRSMG-20260411-0005,PAY-1,P-7,P-7,999612.00,11,B,1
+
+## claim_policy_context
+claim_policy_context_id,claim_id,payer_responsibility,subscriber_relationship_code,group_number,plan_name,insurance_type,benefit_plan_name,patient_relationship_code,same_as_subscriber
+CPC-1,CLM-1,P,18,MASKGRP-AE-77821,MASKAETNA PPO,CI,MASKCOMMERCIAL PLAN,,true
+CPC-2,CLM-2,P,18,MASKUHC-GRP-5110,MASKUHC CHOICE PLUS,CI,MASKCOMMERCIAL PLAN,19,false
+CPC-3,CLM-3,S,01,MASKBCBS-GRP-9217,MASKPPO BLUE PLUS,BL,MASKBLUE CROSS BLUE SHIELD,,true
+CPC-4,CLM-4,P,18,MASKAETNA-GRP-00291,MASKAETNA EPO,CI,MASKCOMMERCIAL PLAN,01,false
+CPC-5,CLM-5,P,18,MASKAETNA-MCR-SUPP-0901,MASKAETNA MEDICARE SUPP,CI,MASKMEDICARE SUPPLEMENT,,true
+
+## claim_flags
+claim_flag_id,claim_id,provider_accept_assignment,benefits_assigned,release_of_information,delay_reason_code_present
+CF-1,CLM-1,true,true,true,false
+CF-2,CLM-2,true,true,true,
+CF-3,CLM-3,true,true,true,
+CF-4,CLM-4,true,true,true,
+CF-5,CLM-5,true,true,true,
+
+## claim_date
+claim_date_id,claim_id,date_type,qualifier,date_format,date_value
+CD-1,CLM-1,statement,434,RD8,20260407-20260407
+CD-2,CLM-2,statement,434,RD8,20260404-20260404
+CD-3,CLM-3,statement,434,RD8,20260402-20260402
+CD-4,CLM-4,statement,434,RD8,20260405-20260405
+CD-5,CLM-5,statement,434,RD8,20260409-20260409
+
+## claim_identifier
+claim_identifier_id,claim_id,qualifier,identifier_value,meaning
+CI-1,CLM-1,D9,MASKENC-10001,encounterIdentifier
+CI-2,CLM-1,EA,MASKAUTH-99182,priorAuthorization
+CI-3,CLM-1,6R,MASKPAT-ACC-10001,patientAccountNumber
+CI-4,CLM-2,D9,MASKENC-10002,encounterIdentifier
+CI-5,CLM-2,9F,MASKREF-330188,referralNumber
+CI-6,CLM-3,D9,MASKENC-10003,encounterIdentifier
+CI-7,CLM-3,G1,MASKPA-882771,priorAuthorization
+CI-8,CLM-4,D9,MASKENC-10004,encounterIdentifier
+CI-9,CLM-5,D9,MASKENC-10005,encounterIdentifier
+CI-10,CLM-5,F8,MASKORIG-CLM-778199,originalReferenceNumber
+CI-11,CLM-5,9F,MASKCARD-REF-22001,referralNumber
+
+## claim_attachment
+claim_attachment_id,claim_id,report_type_code,transmission_code,control_number_qualifier,control_number
+CA-1,CLM-1,OZ,EL,AC,MASKATTCH-0001
+
+## claim_condition
+claim_condition_id,claim_id,segment,category,certification_condition_indicator,condition_code1
+CC-1,CLM-4,CRC,YJ,Y,01
+
+## claim_note
+claim_note_id,claim_id,note_type,note_text
+CN-1,CLM-5,K3,MASKPATIENT ON LONG-TERM ANTICOAGULANT THERAPY; FALL RISK REVIEWED
+
+## claim_diagnosis
+claim_diagnosis_id,claim_id,sequence,qualifier,code
+DX-1,CLM-1,1,ABK,E119
+DX-2,CLM-1,2,ABF,I10
+DX-3,CLM-2,1,ABK,J209
+DX-4,CLM-2,2,ABF,R051
+DX-5,CLM-2,3,ABF,R509
+DX-6,CLM-3,1,ABK,R079
+DX-7,CLM-3,2,ABF,Z8249
+DX-8,CLM-4,1,ABK,G43909
+DX-9,CLM-4,2,ABF,R110
+DX-10,CLM-5,1,ABK,I4891
+DX-11,CLM-5,2,ABF,Z7901
+DX-12,CLM-5,3,ABF,I10
+
+## claim_provider_role
+claim_provider_role_id,claim_id,provider_id,role_code
+CPR-1,CLM-1,PRV-1,DN
+CPR-2,CLM-1,PRV-1,82
+CPR-3,CLM-2,PRV-1,DN
+CPR-4,CLM-2,PRV-2,82
+CPR-5,CLM-3,PRV-3,DN
+CPR-6,CLM-3,PRV-3,82
+CPR-7,CLM-4,PRV-1,DN
+CPR-8,CLM-4,PRV-1,82
+CPR-9,CLM-5,PRV-3,DN
+CPR-10,CLM-5,PRV-3,82
+CPR-11,CLM-5,PRV-4,DN_ADDITIONAL
+
+## claim_service_facility
+claim_service_facility_id,claim_id,service_facility_id
+CSF-1,CLM-3,SF-1
+
+## service_line_entity
+service_line_id,claim_id,line_number,procedure_qualifier,procedure_code,charge_amount,unit_measure,units,date_of_service
+SL-1,CLM-1,1,HC,99214,999185.00,UN,1,20260407
+SL-2,CLM-1,2,HC,83036,99932.00,UN,1,20260407
+SL-3,CLM-2,1,HC,99214,999185.00,UN,1,20260404
+SL-4,CLM-2,2,HC,71046,99974.00,UN,1,20260404
+SL-5,CLM-2,3,HC,94760,99918.00,UN,1,20260404
+SL-6,CLM-3,1,HC,93015,999410.00,UN,1,20260402
+SL-7,CLM-4,1,HC,99214,999185.00,UN,1,20260405
+SL-8,CLM-4,2,HC,96372,99939.00,UN,1,20260405
+SL-9,CLM-4,3,HC,J1885,99936.00,UN,4,20260405
+SL-10,CLM-5,1,HC,99215,999248.00,UN,1,20260409
+SL-11,CLM-5,2,HC,93000,99958.00,UN,1,20260409
+SL-12,CLM-5,3,HC,36415,99912.00,UN,1,20260409
+SL-13,CLM-5,4,HC,80048,99979.00,UN,1,20260409
+SL-14,CLM-5,5,HC,85610,999215.00,UN,1,20260409
+
+## service_line_identifier
+service_line_identifier_id,service_line_id,qualifier,identifier_value
+SLI-1,SL-1,6R,MASKLINE-0001
+SLI-2,SL-2,6R,MASKLINE-0002
+SLI-3,SL-3,6R,MASKLINE-0003
+SLI-4,SL-4,6R,MASKLINE-0004
+SLI-5,SL-5,6R,MASKLINE-0005
+SLI-6,SL-6,6R,MASKLINE-0006
+SLI-7,SL-7,6R,MASKLINE-0007
+SLI-8,SL-8,6R,MASKLINE-0008
+SLI-9,SL-9,6R,MASKLINE-0009
+SLI-10,SL-10,6R,MASKLINE-0010
+SLI-11,SL-11,6R,MASKLINE-0011
+SLI-12,SL-12,6R,MASKLINE-0012
+SLI-13,SL-13,6R,MASKLINE-0013
+SLI-14,SL-14,6R,MASKLINE-0014

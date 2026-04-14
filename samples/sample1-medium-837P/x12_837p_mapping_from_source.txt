@@ -1,0 +1,126 @@
+# Mapping artifacts derived from the uploaded X12 837P message
+# Format: one file, each table rendered as CSV
+
+## parser_profile
+parser_profile_id,message_type,version,segment_delimiter,element_delimiter,component_delimiter
+PP-1,837P,005010X222A1,~,*,: 
+
+## x12_locator
+locator_id,transaction_id,loop_id,segment_ordinal,segment_id,element_position,component_position,repetition_ordinal,qualifier,value
+LOC-0001,TXN-1001,ROOT,1,ISA,13,,1,,000000901
+LOC-0002,TXN-1001,ROOT,2,GS,6,,1,,901
+LOC-0003,TXN-1001,ROOT,3,ST,2,,1,,0001
+LOC-0004,TXN-1001,1000A,5,NM1,2,,1,,NORTH RIVER SPECIALTY MEDICAL GROUP
+LOC-0005,TXN-1001,1000A,6,PER,2,,1,,EDI SUPPORT
+LOC-0006,TXN-1001,1000A,6,PER,4,,1,,6175554100
+LOC-0007,TXN-1001,1000A,6,PER,6,,1,,edi@northriver.example
+LOC-0008,TXN-1001,1000B,7,NM1,2,,1,,CLEARINGHOUSE RECEIVER
+LOC-0009,TXN-1001,2010AA,10,NM1,3,,1,,NORTH RIVER SPECIALTY MEDICAL GROUP
+LOC-0010,TXN-1001,2010AA,10,NM1,9,,1,,1992994001
+LOC-0011,TXN-1001,2010AA,11,N3,1,,1,,1250 LONGWOOD AVE
+LOC-0012,TXN-1001,2010AA,11,N3,2,,1,,STE 400
+LOC-0013,TXN-1001,2010AA,12,N4,1,,1,,BOSTON
+LOC-0014,TXN-1001,2010AA,12,N4,2,,1,,MA
+LOC-0015,TXN-1001,2010AA,12,N4,3,,1,,02115
+LOC-0016,TXN-1001,2300-CLM1,20,CLM,1,,1,,NRSMG-20260411-0001
+LOC-0017,TXN-1001,2300-CLM1,20,CLM,2,,1,,217
+LOC-0018,TXN-1001,2300-CLM1,22,REF,2,,1,D9,ENC-10001
+LOC-0019,TXN-1001,2300-CLM1,23,REF,2,,1,EA,AUTH-99182
+LOC-0020,TXN-1001,2300-CLM1,27,REF,2,,1,6R,PAT-ACC-10001
+LOC-0021,TXN-1001,2400-CLM1-L1,29,SV1,1,2,1,,99214
+LOC-0022,TXN-1001,2400-CLM1-L1,31,REF,2,,1,6R,LINE-0001
+LOC-0023,TXN-1001,2400-CLM1-L2,33,SV1,1,2,1,,83036
+LOC-0024,TXN-1001,2400-CLM1-L2,35,REF,2,,1,6R,LINE-0002
+LOC-0025,TXN-1001,2300-CLM2,46,CLM,1,,1,,NRSMG-20260411-0002
+LOC-0026,TXN-1001,2300-CLM2,48,REF,2,,1,D9,ENC-10002
+LOC-0027,TXN-1001,2300-CLM2,49,REF,2,,1,9F,REF-330188
+LOC-0028,TXN-1001,2300-CLM5,91,REF,2,,1,D9,ENC-10005
+LOC-0029,TXN-1001,2300-CLM5,92,REF,2,,1,F8,ORIG-CLM-778199
+LOC-0030,TXN-1001,2300-CLM5,98,REF,2,,1,9F,CARD-REF-22001
+
+## extraction_rule
+extraction_rule_id,source_locator_pattern,target_table,target_column,target_key_strategy,transform_type
+ER-001,2010BA/NM1/element4,person_name,first_name,claim.subscriber_person_id,direct
+ER-002,2010BA/NM1/element3,person_name,last_name,claim.subscriber_person_id,direct
+ER-003,2010BA/NM1/element5,person_name,middle_name,claim.subscriber_person_id,direct_optional
+ER-004,2010BA/NM1/element9,person_identifier,identifier_value,claim.subscriber_person_id,direct
+ER-005,2010BA/N3/element1,person_address,address_line1,claim.subscriber_person_id,direct
+ER-006,2010BA/N4/element1,person_address,city,claim.subscriber_person_id,direct
+ER-007,2010BA/N4/element2,person_address,state,claim.subscriber_person_id,direct
+ER-008,2010BA/N4/element3,person_address,postal_code,claim.subscriber_person_id,direct
+ER-009,2010BA/DMG/element2,person_demographic,birth_date,claim.subscriber_person_id,direct
+ER-010,2010BA/DMG/element3,person_demographic,gender,claim.subscriber_person_id,direct
+ER-011,2010CA/NM1/element4,person_name,first_name,claim.patient_person_id,direct
+ER-012,2010CA/NM1/element3,person_name,last_name,claim.patient_person_id,direct
+ER-013,2010CA/NM1/element9,person_identifier,identifier_value,claim.patient_person_id,direct
+ER-014,2300/CLM/element1,claim_entity,claim_submitter_id,claim.claim_id,direct
+ER-015,2300/CLM/element2,claim_entity,total_charge_amount,claim.claim_id,direct_numeric
+ER-016,2300/REF[D9]/element2,claim_identifier,identifier_value,claim.claim_id+qualifier,direct
+ER-017,2300/REF[EA]/element2,claim_identifier,identifier_value,claim.claim_id+qualifier,direct
+ER-018,2300/REF[G1]/element2,claim_identifier,identifier_value,claim.claim_id+qualifier,direct
+ER-019,2300/REF[6R]/element2,claim_identifier,identifier_value,claim.claim_id+qualifier,direct
+ER-020,2300/REF[9F]/element2,claim_identifier,identifier_value,claim.claim_id+qualifier,direct
+ER-021,2300/REF[F8]/element2,claim_identifier,identifier_value,claim.claim_id+qualifier,direct
+ER-022,2300/PWK/element6,claim_attachment,control_number,claim.claim_id,direct
+ER-023,2300/K3/element1,claim_note,note_text,claim.claim_id,direct
+ER-024,2300/CRC/element4,claim_condition,condition_code1,claim.claim_id,direct
+ER-025,2400/SV1/element1.component2,service_line_entity,procedure_code,claim.claim_id+line_number,direct
+ER-026,2400/SV1/element2,service_line_entity,charge_amount,claim.claim_id+line_number,direct_numeric
+ER-027,2400/DTP[472]/element3,service_line_entity,date_of_service,claim.claim_id+line_number,direct
+ER-028,2400/REF[6R]/element2,service_line_identifier,identifier_value,service_line.service_line_id+qualifier,direct
+
+## phi_classification_rule
+phi_rule_id,source_locator_pattern,phi_category,masking_required
+PHI-001,2010BA/NM1/element3,name,true
+PHI-002,2010BA/NM1/element4,name,true
+PHI-003,2010BA/NM1/element5,name,true
+PHI-004,2010BA/NM1/element9,member_id,true
+PHI-005,2010BA/N3/element1,address,true
+PHI-006,2010BA/N4/element1,address,true
+PHI-007,2010BA/N4/element3,address,true
+PHI-008,2010BA/DMG/element2,dob,true
+PHI-009,2010CA/NM1/element3,name,true
+PHI-010,2010CA/NM1/element4,name,true
+PHI-011,2010CA/NM1/element9,member_id,true
+PHI-012,2010CA/N3/element1,address,true
+PHI-013,2010CA/N4/element1,address,true
+PHI-014,2010CA/N4/element3,address,true
+PHI-015,2010CA/DMG/element2,dob,true
+PHI-016,2300/REF[D9]/element2,claim_reference,conditional
+PHI-017,2300/REF[EA]/element2,authorization,conditional
+PHI-018,2300/REF[6R]/element2,patient_account,conditional
+PHI-019,2300/REF[9F]/element2,referral,conditional
+PHI-020,2300/REF[F8]/element2,original_claim_reference,conditional
+PHI-021,2300/PWK/element6,attachment_reference,conditional
+PHI-022,2300/K3/element1,free_text_note,conditional
+PHI-023,2400/REF[6R]/element2,line_reference,conditional
+
+## canonical_binding
+binding_id,locator_id,target_table,target_row_id,target_column
+BND-001,LOC-0018,claim_identifier,CI-1,identifier_value
+BND-002,LOC-0019,claim_identifier,CI-2,identifier_value
+BND-003,LOC-0020,claim_identifier,CI-3,identifier_value
+BND-004,LOC-0021,service_line_entity,SL-1,procedure_code
+BND-005,LOC-0022,service_line_identifier,SLI-1,identifier_value
+BND-006,LOC-0023,service_line_entity,SL-2,procedure_code
+BND-007,LOC-0024,service_line_identifier,SLI-2,identifier_value
+BND-008,LOC-0026,claim_identifier,CI-4,identifier_value
+BND-009,LOC-0027,claim_identifier,CI-5,identifier_value
+BND-010,LOC-0028,claim_identifier,CI-9,identifier_value
+BND-011,LOC-0029,claim_identifier,CI-10,identifier_value
+BND-012,LOC-0030,claim_identifier,CI-11,identifier_value
+
+## replacement_manifest_rule
+replacement_rule_id,target_table,target_column,locator_pattern,replacement_mode
+RMR-001,person_name,first_name,2010BA/NM1/element4,replace_element
+RMR-002,person_name,last_name,2010BA/NM1/element3,replace_element
+RMR-003,person_identifier,identifier_value,2010BA/NM1/element9,replace_element
+RMR-004,person_address,address_line1,2010BA/N3/element1,replace_element
+RMR-005,person_demographic,birth_date,2010BA/DMG/element2,replace_element
+RMR-006,person_name,first_name,2010CA/NM1/element4,replace_element
+RMR-007,person_name,last_name,2010CA/NM1/element3,replace_element
+RMR-008,person_identifier,identifier_value,2010CA/NM1/element9,replace_element
+RMR-009,claim_identifier,identifier_value,2300/REF/*/element2,replace_element
+RMR-010,claim_attachment,control_number,2300/PWK/element6,replace_element
+RMR-011,claim_note,note_text,2300/K3/element1,replace_element
+RMR-012,service_line_identifier,identifier_value,2400/REF[6R]/element2,replace_element
